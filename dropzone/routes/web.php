@@ -1,18 +1,14 @@
 <?php
 
+use App\Http\Controllers\ImageUploadController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
+Route::get('/image/upload', [ImageUploadController::class, 'create']);
+Route::post('/image/upload/store', [ImageUploadController::class, 'store']);
+Route::post('/image/destroy', [ImageUploadController::class, 'destroy']);
 
 Route::get('/', function () {
     return view('welcome');
 });
+
