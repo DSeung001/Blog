@@ -71,6 +71,9 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+
+        // 아래 처럼 추가 후, php artisan storage:link 하면 심볼릭 링크 생성
+        public_path('uploads') => storage_path('app/uploads'),
     ],
 
 ];

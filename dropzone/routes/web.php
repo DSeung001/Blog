@@ -1,14 +1,11 @@
 <?php
 
-use App\Http\Controllers\ImageUploadController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/image/upload', [ImageUploadController::class, 'create']);
-Route::post('/image/upload/store', [ImageUploadController::class, 'store']);
-Route::post('/image/destroy', [ImageUploadController::class, 'destroy']);
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/image', [ImageController::class, 'index'])->name('image.index');
+Route::get('/image/create', [ImageController::class, 'create'])->name('image.create');
+Route::post('/image/store', [ImageController::class, 'store'])->name('image.store');
+Route::post('/image/destroy', [ImageController::class, 'destroy'])->name('image.destroy');
 
