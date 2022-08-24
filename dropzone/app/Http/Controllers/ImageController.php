@@ -18,7 +18,7 @@ class ImageController extends Controller
 
     public function index()
     {
-        $lists = $this->image->all();
+        $lists = $this->image->paginate(10);
         return view('image/index', compact("lists"));
     }
 
@@ -30,29 +30,38 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         $files = $request->file('file');
-        foreach ($files as $file) {
-            $originName = $file->getClientOriginalName();
+        $originNames = $request->input('origin_name');
+
+        foreach ($files as $key => $file) {
             $path = Storage::putFileAs(
                 "uploads/" . date('y-m-d'),
                 $file,
-                substr(now()->timestamp, -4, null) . '_' . $originName
+                $file->getClientOriginalName()
             );
             $this->image->create([
-                'origin_name' => $originName,
+                'origin_name' => $originNames[$key],
                 'path' => $path
             ]);
         }
         return response()->json(['success' => true]);
     }
 
-    public function destroy(Request $request)
+
+    public function destroy(Image $image, Request $request)
     {
-        $filename = $request->get('filename');
-        Image::where('filename', $filename)->delete();
-        $path = public_path() . '/images/' . $filename;
-        if (file_exists($path)) {
-            unlink($path);
+        $image->delete();
+        Storage::delete($image->path);
+        $page = $request->input("page", 1);
+        return redirect()->route('image.index', ["page" => $page]);
+    }
+
+    public function ajaxDestroy(Request $request)
+    {
+        $image = $this->image->where("path", "like", "%".$request["file_name"])->first();
+        if($image != null){
+            Storage::delete($image->path);
+            $image->delete();
         }
-        return $filename;
+        return response()->json(['success' => true]);
     }
 }

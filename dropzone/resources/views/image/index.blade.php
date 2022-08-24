@@ -30,9 +30,12 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @php
+                         $number = ($lists->currentPage() -1) * $lists->perPage()
+                    @endphp
                     @foreach($lists as $key => $list)
                         <tr>
-                            <td scope="row">{{$key + 1}}</td>
+                            <td scope="row">{{$key + 1 + $number }}</td>
                             <td>{{$list->origin_name}}</td>
                             <td class="w-25">
                                 <img src="{{asset($list->path)}}" class="img-fluid img-thumbnail"
@@ -40,71 +43,22 @@
                             </td>
                             <td>{{$list->created_at}}</td>
                             <td>
-                                <a>
-                                    Delete
-                                </a>
+                                <form action="{{route('image.destroy', $list->id)}}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <input type="hidden" name="page" value="{{$lists->currentPage()}}">
+                                    <input onclick="return confirm('정말로 삭제하겠습니까?')" type="submit" value="delete"/>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+
+                {!! $lists->links() !!}
             </div>
         </div>
     </div>
-
-
-    <script type="text/javascript">
-        Dropzone.options.dropzone =
-            {
-                autoProcessQueue: false,
-                uploadMultiple: true,
-                maxFilesize: 50,
-                acceptedFiles: ".jpeg,.jpg,.png,.gif",
-                addRemoveLinks: true,
-                timeout: 100000,
-                init: function () {
-                    let myDropzone = this;
-                    $("#submit-all").click(function (e) {
-                        e.preventDefault();
-                        myDropzone.processQueue();
-                    });
-                    myDropzone.on("totaluploadprogress", function (progress) {
-                        $(".progress-bar").width(progress + '%');
-                    });
-                },
-                removedfile: function (file) {
-                    let name = file.upload.filename;
-                    console.log(file);
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                        },
-                        type: 'POST',
-                        url: '{{ url("image.destory") }}',
-                        data: {filename: name},
-                        success: function (data) {
-                            console.log("File has been successfully removed!!");
-                        },
-                        error: function (e) {
-                            console.log(e);
-                        }
-                    });
-                    let fileRef;
-                    return (fileRef = file.previewElement) != null ?
-                        fileRef.parentNode.removeChild(file.previewElement) : void 0;
-                },
-                success: function (file, response) {
-                    console.log("success");
-                    console.log(response);
-                },
-                error: function (file, response) {
-                    console.log(file);
-                    console.log(response);
-                    console.log("error");
-                    return false;
-                }
-            };
-    </script>
 </body>
 </html>
 

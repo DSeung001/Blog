@@ -14,6 +14,9 @@
 
     <h4 class="pt-4">Laravel DropZone</h4>
     <hr class="pd-4"/>
+    <div class="alert alert-danger" role="alert" style="display: none">
+        이미지는 한번에 5개까지 업로드가 가능합니다.
+    </div>
     <form method="post" action="{{route('image.store')}}" enctype="multipart/form-data" class="dropzone" id="dropzone">
         @csrf
     </form>
@@ -31,29 +34,46 @@
                 autoProcessQueue: false,
                 uploadMultiple: true,
                 maxFilesize: 50,
+                parallelUploads: 5,
+                maxFiles: 5,
                 acceptedFiles: ".jpeg,.jpg,.png,.gif",
                 addRemoveLinks: true,
-                timeout: 100000,
+                timeout: 50000,
+                renameFile: function (file) {
+                    var dt = new Date();
+                    var time = dt.getTime();
+                    return time + "_" + file.name;
+                },
                 init: function () {
                     let myDropzone = this;
                     $("#submit-all").click(function (e) {
                         e.preventDefault();
                         myDropzone.processQueue();
                     });
+
+                    myDropzone.on("maxfilesexceeded", function (file) {
+                        myDropzone.removeFile(file);
+                        $(".alert").show();
+                    });
+
                     myDropzone.on("totaluploadprogress", function (progress) {
                         $(".progress-bar").width(progress + '%');
                     });
                 },
                 removedfile: function (file) {
-                    let name = file.upload.filename;
+                    let file_name = file.upload.filename;
+                    let origin_name = file.name;
                     console.log(file);
                     $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                         },
                         type: 'POST',
-                        url: '{{ url("image.destory") }}',
-                        data: {filename: name},
+                        url: '{{ route("image.ajaxDestroy") }}',
+                        data: {
+                            "file_name": file_name,
+                            "origin_name": origin_name
+                        },
                         success: function (data) {
                             console.log("File has been successfully removed!!");
                         },
@@ -70,9 +90,6 @@
                     console.log(response);
                 },
                 error: function (file, response) {
-                    console.log(file);
-                    console.log(response);
-                    console.log("error");
                     return false;
                 }
             };
