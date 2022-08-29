@@ -40,8 +40,8 @@
                 addRemoveLinks: true,
                 timeout: 50000,
                 renameFile: function (file) {
-                    var dt = new Date();
-                    var time = dt.getTime();
+                    let dt = new Date();
+                    let time = dt.getTime();
                     return time + "_" + file.name;
                 },
                 init: function () {
@@ -59,6 +59,10 @@
                     myDropzone.on("totaluploadprogress", function (progress) {
                         $(".progress-bar").width(progress + '%');
                     });
+
+                    myDropzone.on("sending", function(file, xhr, formData){
+                        formData.append("origin_name[]", file.name);
+                    })
                 },
                 removedfile: function (file) {
                     let file_name = file.upload.filename;
