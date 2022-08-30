@@ -43,6 +43,7 @@
                             </td>
                             <td>{{$list->created_at}}</td>
                             <td>
+                                {{-- 아직은 삭제 기능을 만들 지 않았으므로 실행되지 않습니다. --}}
                                 <form action="{{route('image.destroy', $list->id)}}" method="post">
                                     @csrf
                                     @method('delete')
@@ -55,6 +56,7 @@
                     </tbody>
                 </table>
 
+                {{-- 라라벨 기본 페이지네이션을 사용하도록 합시다. --}}
                 {!! $lists->links() !!}
             </div>
         </div>
