@@ -21,18 +21,21 @@ class RandomGeneratorExport implements FromCollection
     }
 
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
+        // 대용량 데이터도 만들기 위해 제한을 임시로 풀었습니다.
         ini_set('max_execution_time', '300');
         ini_set('memory_limit','-1');
 
         $randomNumbers = [];
         $count = 0;
 
+        // 중복이 없으면 통과
         while ($count != $this->count) {
             $randomNumbers = [];
+            // $this->count와 이 메소드 내에 지역 변수 $count는 다릅니다.
             for ($index = 0; $index < $this->count; $index++) {
                 $randomNumbers[] = $this->getRandomNumber();
             }
@@ -41,8 +44,9 @@ class RandomGeneratorExport implements FromCollection
         }
 
         $result = [];
+        // 번호 저장 제거
         foreach ($randomNumbers as $index => $randomNumber){
-            $result[] = [$index + 1, $randomNumber];
+            $result[] = [$randomNumber];
         }
         return new Collection($result);
     }
