@@ -25,11 +25,26 @@ class RandomGeneratorExport implements FromCollection
     */
     public function collection()
     {
+        ini_set('max_execution_time', '300');
+        ini_set('memory_limit','-1');
+
         $randomNumbers = [];
-        for($index = 1; $index <= $this->count; $index++){
-            $randomNumbers[] = [$index, $this->getRandomNumber()];
+        $count = 0;
+
+        while ($count != $this->count) {
+            $randomNumbers = [];
+            for ($index = 0; $index < $this->count; $index++) {
+                $randomNumbers[] = $this->getRandomNumber();
+            }
+            $randomNumbers = array_unique($randomNumbers);
+            $count = count($randomNumbers);
         }
-        return new Collection($randomNumbers);
+
+        $result = [];
+        foreach ($randomNumbers as $index => $randomNumber){
+            $result[] = [$index + 1, $randomNumber];
+        }
+        return new Collection($result);
     }
 
     /**
