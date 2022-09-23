@@ -19,8 +19,6 @@ class ProductController extends Controller
     private $product;
 
     public function __construct(product $product){
-        \Log::info("생성자");
-
         // Laravel 의 IOC(Inversion of Control) 입니다
         // 일단은 이렇게 모델을 가져오는 것이 추천 코드라고 생각하시면 됩니다.
         $this->product = $product;
@@ -52,7 +50,6 @@ class ProductController extends Controller
     }*/
 
     public function index(){
-        \Log::info("index");
         // products 의 데이터를 최신순으로 페이징을 해서 가져옵니다.
         $products = $this->product->latest()->paginate(10);
         // produce/index.blade 에 $products 를 보내줍니다
@@ -60,7 +57,6 @@ class ProductController extends Controller
     }
 
     public function create(){
-        \Log::info("create");
         return view('products.create');
     }
 
@@ -73,18 +69,15 @@ class ProductController extends Controller
 
     // 상세 페이지
     public function show(Product $product){
-        \Log::info("show");
         // show 에 경우는 해당 페이지의 모델 값이 파라미터로 넘어옵니다.
         return view('products.show', compact('product'));
     }
 
     public function edit(Product $product){
-        \Log::info("edit");
         return view('products.edit', compact('product'));
     }
 
     public function update(Request $request, Product $product){
-        \Log::info("update");
         $request = $request->validate([
             'name' => 'required',
             'content' => 'required'
@@ -95,7 +88,6 @@ class ProductController extends Controller
     }
 
     public function destroy(Product $product){
-        \Log::info("destroy");
         $product->delete();
         return redirect()->route('products.index');
     }
