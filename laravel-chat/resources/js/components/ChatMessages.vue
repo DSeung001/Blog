@@ -4,19 +4,18 @@
             <div class="clearfix">
                 <div class="header">
                     <strong>
-                        {{message.user.name}}
+                        {{ message.user.name }}
                     </strong>
                 </div>
                 <p>
-                    {{message.message}}
+                    {{ message.message }}
                 </p>
             </div>
         </li>
     </ul>
 </template>
-
 <script>
 export default {
     props: ["messages"],
-}
+};
 </script>

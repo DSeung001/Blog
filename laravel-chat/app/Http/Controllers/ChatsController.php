@@ -22,7 +22,7 @@ class ChatsController extends Controller
 
     public function sendMessage(Request $request){
         $user = Auth::user();
-        $message = $user->message()->create([
+        $message = $user->messages()->create([
             'message' => $request->input('message')
         ]);
         return ['status' => 'Message Sent!'];

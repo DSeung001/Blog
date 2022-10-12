@@ -20,7 +20,6 @@ const app = createApp({
         }
     },
     created() {
-        console.log('created');
         this.fetchMessages();
     },
     methods: {
