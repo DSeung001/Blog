@@ -21,6 +21,14 @@ const app = createApp({
     },
     created() {
         this.fetchMessages();
+        window.Echo.private('chat')
+            .listen('MessageSent', (e)=>{
+                console.log('Echo Listen')
+                this.messages.push({
+                    message : e.message.message,
+                    user: e.user
+                })
+            })
     },
     methods: {
         fetchMessages() {
