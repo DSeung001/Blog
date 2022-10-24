@@ -18,8 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/email', function () {
-    return view('email');
+Route::get('/emailForm', function () {
+    return view('emailForm');
 })->name('emailForm');
 
 Route::post('/emailSend', [EmailHistoryController::class, 'emailSend'])->name('emailSend');

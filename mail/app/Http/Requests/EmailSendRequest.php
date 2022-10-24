@@ -13,7 +13,7 @@ class EmailSendRequest extends FormRequest
      */
     public function authorize()
     {
-        // 원래는 false
+        // 로그인 했을 때만 사용할 것인가 = false
         return true;
     }
 

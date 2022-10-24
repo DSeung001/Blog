@@ -13,7 +13,7 @@
         <div class="col-10 offset-1 mt-5">
             <div class="card">
                 <div class="card-body">
-
+                    {{--성공시 성공 문장을 출력--}}
                     @if(Session::has('success'))
                         <div class="alert alert-success">
                             {{Session::get('success')}}
