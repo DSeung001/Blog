@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmailHistoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/email', function () {
+    return view('email');
+})->name('emailForm');
+
+Route::post('/emailSend', [EmailHistoryController::class, 'emailSend'])->name('emailSend');
+
