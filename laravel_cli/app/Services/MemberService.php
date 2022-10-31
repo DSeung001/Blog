@@ -35,9 +35,9 @@ class MemberService
      */
     public function list($option = null){
         if(isset($option) && $option == 'name'){
-            return $this->member->pluck('name')->toArray();
+            return $this->member->orderBy('id')->pluck('name')->toArray();
         }
-        return $this->member->all(['id', 'name'])->toArray();
+        return $this->member->orderBy('id')->select(['id', 'name'])->get()->toArray();
     }
 
     /**
