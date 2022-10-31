@@ -27,3 +27,4 @@
 - [옵저버로 CUD에 대한 이력 쌓기](https://seung.tistory.com/entry/Laravel-9-Observer-%EC%8D%A8%EB%B3%B4%EC%9E%90-%EC%98%B5%EC%A0%80%EB%B2%84%EB%A1%9C-%EC%9D%B4%EB%A0%A5-%EC%8C%93%EA%B8%B0)
 - [이메일 보내기 with Google SMTP](https://seung.tistory.com/entry/Laravel9-%EC%9D%B4%EB%A9%94%EC%9D%BC-%EB%B3%B4%EB%82%B4%EA%B8%B0-with-Google-SMTP-Markdown)
 - [[Laravel9] 라라벨 테스팅 만들기 with Trait, Factory](https://seung.tistory.com/entry/Laravel9-%EB%9D%BC%EB%9D%BC%EB%B2%A8-%ED%85%8C%EC%8A%A4%ED%8C%85-%EB%A7%8C%EB%93%A4%EA%B8%B0-with-Trait-Factory)
+- [[Laravel9] 라라벨 아티즌 콘솔 만들기(Artisan console)](https://seung.tistory.com/entry/Laravel9-%EB%9D%BC%EB%9D%BC%EB%B2%A8-%EC%95%84%ED%8B%B0%EC%A6%8C-%EC%BD%98%EC%86%94-%EB%A7%8C%EB%93%A4%EA%B8%B0Artisan-console)
