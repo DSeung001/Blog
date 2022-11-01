@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // 테스트를 위해 분당 한번 씩 실행합니다.
+        $schedule->command('database:backup')->everyMinute();
     }
 
     /**
