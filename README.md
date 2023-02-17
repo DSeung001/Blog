@@ -30,3 +30,4 @@
 - [[Laravel9] 라라벨 테스팅 만들기 with Trait, Factory](https://seung.tistory.com/entry/Laravel9-%EB%9D%BC%EB%9D%BC%EB%B2%A8-%ED%85%8C%EC%8A%A4%ED%8C%85-%EB%A7%8C%EB%93%A4%EA%B8%B0-with-Trait-Factory)
 - [[Laravel9] 라라벨 아티즌 콘솔 만들기(Artisan console)](https://seung.tistory.com/entry/Laravel9-%EB%9D%BC%EB%9D%BC%EB%B2%A8-%EC%95%84%ED%8B%B0%EC%A6%8C-%EC%BD%98%EC%86%94-%EB%A7%8C%EB%93%A4%EA%B8%B0Artisan-console)
 - [[Laravel9] 라라벨 DB 백업 명령어 만들기 및 자동화 with Artisan console](https://seung.tistory.com/entry/Laravel9-%EB%9D%BC%EB%9D%BC%EB%B2%A8-DB-%EB%B0%B1%EC%97%85-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EB%B0%8F-%EC%9E%90%EB%8F%99%ED%99%94-with-Artisan-console?category=955330)
+- [[Laravel9] 쉽게 라라벨 DI, IOC 이해하기](https://seung.tistory.com/entry/Laravel9-%EC%89%BD%EA%B2%8C-%EB%9D%BC%EB%9D%BC%EB%B2%A8-DI-IOC-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0)
