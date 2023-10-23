@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: ..
+      dockerfile: nginx.dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - php
+    volumes:
+      - ./project:/var/www/html:delegated
+    container_name: app-nginx
+
+  php:
+    build:
+      context: ..
+      dockerfile: php.dockerfile
+    volumes:
+      - ./project:/var/www/html:delegated
+    ports:
+      - "9000:9000"
+    container_name: app-php
